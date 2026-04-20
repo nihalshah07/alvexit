@@ -112,11 +112,13 @@ a {
   background: linear-gradient(135deg, var(--accent-color) 0%, #2563eb 100%);
   color: white;
   box-shadow: 0 4px 20px var(--accent-glow);
+  animation: btnPulse 2.5s infinite;
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
+  animation: none;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.6);
 }
 
 .btn-outline {
@@ -285,19 +287,96 @@ nav {
   animation: pulseGlow 15s infinite alternate-reverse ease-in-out;
 }
 
-.hero-content {
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
   position: relative;
   z-index: 2;
-  max-width: 850px;
-  text-align: center;
-  margin: 0 auto;
 }
 
-.hero p {
-  font-size: 1.3rem;
-  margin-bottom: 2.5rem;
-  max-width: 700px;
-  margin-inline: auto;
+.hero-text {
+  text-align: left;
+}
+
+.hero-text h1 {
+  text-align: left;
+}
+
+.hero-visual {
+  position: relative;
+  width: 100%;
+  height: 550px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-main-card {
+  width: 85%;
+  height: 80%;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 32px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem;
+  justify-content: space-around;
+}
+
+.hmc-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem;
+  background: rgba(255,255,255,0.03);
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.floating-card {
+  position: absolute;
+  background: rgba(17, 24, 39, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+  backdrop-filter: blur(15px);
+  z-index: 10;
+}
+
+.fc-top-right {
+  top: 5%;
+  right: -5%;
+  animation: float 5s ease-in-out infinite;
+}
+
+.fc-bottom-left {
+  bottom: 5%;
+  left: -5%;
+  animation: float 7s ease-in-out infinite reverse;
+}
+
+.fc-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  font-family: 'Outfit', sans-serif;
+}
+
+.fc-value {
+  font-size: 2.8rem;
+  font-weight: 800;
+  font-family: 'Outfit', sans-serif;
+  color: var(--accent-light);
+  line-height: 1;
 }
 
 .hero-btns {
@@ -331,9 +410,9 @@ nav {
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(59, 130, 246, 0.3);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  transform: translateY(-10px) scale(1.02);
+  border-color: var(--accent-light);
+  box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.3);
 }
 
 .card-icon {
@@ -410,6 +489,7 @@ nav {
   border-radius: 24px;
   border: 1px solid var(--border-color);
   box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  animation: float 6s ease-in-out infinite;
 }
 
 .check-list {
@@ -514,6 +594,18 @@ footer {
 }
 
 /* Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes btnPulse {
+  0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5); }
+  70% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(30px);
@@ -524,19 +616,38 @@ footer {
   transform: translateY(0);
 }
 
+/* Stagger reveals */
+.grid-3 > div:nth-child(1) { transition-delay: 0.1s; }
+.grid-3 > div:nth-child(2) { transition-delay: 0.2s; }
+.grid-3 > div:nth-child(3) { transition-delay: 0.3s; }
+.grid-3 > div:nth-child(4) { transition-delay: 0.4s; }
+.grid-3 > div:nth-child(5) { transition-delay: 0.5s; }
+.grid-3 > div:nth-child(6) { transition-delay: 0.6s; }
+
+.grid-4 > div:nth-child(1) { transition-delay: 0.1s; }
+.grid-4 > div:nth-child(2) { transition-delay: 0.2s; }
+.grid-4 > div:nth-child(3) { transition-delay: 0.3s; }
+.grid-4 > div:nth-child(4) { transition-delay: 0.4s; }
+
 /* Responsive */
 @media (max-width: 1024px) {
   h1 { font-size: 3.5rem; }
   h2 { font-size: 2.5rem; }
   .section { padding: 6rem 0; }
   .content-block { gap: 3rem; }
+  .hero-visual { height: 450px; }
 }
 
 @media (max-width: 992px) {
-  .content-block, .contact-wrapper { grid-template-columns: 1fr; gap: 3rem; }
+  .hero-grid, .content-block, .contact-wrapper { grid-template-columns: 1fr; gap: 3rem; }
+  .hero-text { text-align: center; }
+  .hero-text h1 { text-align: center; }
+  .hero-btns { justify-content: center !important; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
   .hero::before { width: 400px; height: 400px; filter: blur(40px); }
   .hero::after { width: 300px; height: 300px; filter: blur(40px); }
+  .fc-top-right { right: 5%; }
+  .fc-bottom-left { left: 5%; }
 }
 
 @media (max-width: 768px) {
@@ -549,7 +660,7 @@ footer {
   .container { padding: 0 1.5rem; }
   
   .hero { min-height: 80vh; padding-top: 100px; }
-  .hero p { font-size: 1.1rem; margin-bottom: 2rem; }
+  .hero p { font-size: 1.1rem; margin-bottom: 2rem; text-align: center; }
   .hero-btns { flex-direction: column; gap: 1rem; }
   .btn { width: 100%; padding: 1rem; }
   
@@ -577,6 +688,16 @@ footer {
   
   .content-image, .image-placeholder { height: 250px; }
   
+  /* Hero Visual Fixes for Mobile */
+  .hero-visual { height: auto; padding: 2rem 0; margin-top: 1rem; }
+  .hero-main-card { width: 100%; height: auto; padding: 1.5rem; gap: 1rem; }
+  .hmc-item { padding: 0.8rem; font-size: 0.9rem; }
+  .floating-card { padding: 1rem; }
+  .fc-label { font-size: 0.65rem; }
+  .fc-value { font-size: 1.8rem; }
+  .fc-top-right { top: 0; right: -10px; }
+  .fc-bottom-left { bottom: 0; left: -10px; }
+  
   .contact-wrapper { padding: 2rem 1.5rem; gap: 2rem; }
   .contact-info h3 { font-size: 1.5rem; }
   
@@ -589,4 +710,10 @@ footer {
   .section-header { margin-bottom: 3rem; }
   .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
   .stat-number { font-size: 2.5rem; }
+  
+  /* Micro tweaks for tiny screens */
+  .hero-main-card { width: 95%; margin: 0 auto; }
+  .fc-top-right { top: -10px; right: 0; }
+  .fc-bottom-left { bottom: -10px; left: 0; }
+  .fc-value { font-size: 1.4rem; }
 }
